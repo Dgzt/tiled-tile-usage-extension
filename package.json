@@ -1,0 +1,19 @@
+{
+  "name": "tiled-tile-usage-extension",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "compile": "npm run lint && tsc"
+  },
+  "author": "zsurotibor@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.1.2",
+    "eslint": "^7.15.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "@typescript-eslint/eslint-plugin": "^4.9.0"
+  }
+}
