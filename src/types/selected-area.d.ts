@@ -1,0 +1,3 @@
+interface SelectedArea {
+    boundingRect: Rectangle;
+}
