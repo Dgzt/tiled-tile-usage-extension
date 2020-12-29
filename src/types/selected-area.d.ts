@@ -1,5 +1,3 @@
-import {Rectangle} from "./rectangle";
-
-export interface SelectedArea {
+interface SelectedArea {
     boundingRect: Rectangle;
 }

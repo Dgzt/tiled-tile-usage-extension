@@ -1,5 +1,1 @@
-import {Tiled} from "./tiled";
-
-declare global {
-    const tiled: Tiled;
-}
+declare const tiled: Tiled;

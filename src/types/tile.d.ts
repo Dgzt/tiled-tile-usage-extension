@@ -1,6 +1,3 @@
-import {Tileset} from "./tileset";
-import {Size} from "./size";
-
 interface Tile {
     readonly id: number;
     readonly width: number;

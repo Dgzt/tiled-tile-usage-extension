@@ -1,4 +1,4 @@
-export enum StaggerAxisEnum {
+enum StaggerAxisEnum {
     StaggerX = 'StaggerX',
     StaggerY = 'StaggerY'
 }

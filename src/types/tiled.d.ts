@@ -1,6 +1,3 @@
-import {Asset} from "./asset";
-import {Action} from "./action";
-
 interface Tiled {
 
     activeAsset : Asset;

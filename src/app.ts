@@ -2,7 +2,8 @@ const actionName = 'TileUsageAction';
 
 const action = tiled.registerAction(actionName, () => {
     if (tiled.activeAsset.isTileMap) {
-        tiled.log('Tile map');
+        const tileMap = tiled.activeAsset as TileMap;
+        tiled.log(tileMap.tilesets.length.toString());
     } else {
         // TODO
     }
