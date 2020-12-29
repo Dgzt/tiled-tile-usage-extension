@@ -1,3 +1,6 @@
+import {TileMap} from "./tile-map";
+import {Point} from "./point";
+
 interface Layer {
     name: string;
     opacity: number;

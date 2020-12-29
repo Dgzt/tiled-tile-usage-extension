@@ -1,4 +1,4 @@
-enum OrientationEnum {
+export enum OrientationEnum {
     Unknown = 'Unknown',
     Orthogonal = 'Orthogonal',
     Isometric = 'Isometric',

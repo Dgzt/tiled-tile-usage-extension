@@ -1,4 +1,7 @@
-interface Tileset {
+import {Tile} from "./tile";
+import {Size} from "./size";
+
+export interface Tileset {
     name: string;
     image: string;
     readonly tiles : Array<Tile>;

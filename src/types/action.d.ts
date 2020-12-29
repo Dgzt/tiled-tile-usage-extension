@@ -1,4 +1,4 @@
-interface Action {
+export interface Action {
     checkable: boolean;
     checked: boolean;
     enabled: boolean;

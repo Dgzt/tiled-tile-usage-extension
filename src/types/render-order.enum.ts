@@ -1,4 +1,4 @@
-enum RenderOrderEnum {
+export enum RenderOrderEnum {
     RightDown = 'RightDown',
     RightUp = 'RightUp',
     LeftDown = 'LeftDown',

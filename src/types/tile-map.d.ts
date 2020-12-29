@@ -1,3 +1,13 @@
+import {Tileset} from "./tileset";
+import {Layer} from "./layer";
+import {StaggerAxisEnum} from "./stagger-axis.enum";
+import {OrientationEnum} from "./orientation.enum";
+import {RenderOrderEnum} from "./render-order.enum";
+import {StaggerIndexEnum} from "./stagger-index.enum";
+import {LayerDataFormatEnum} from "./layer-data-format.enum";
+import {SelectedArea} from "./selected-area";
+import {Size} from "./size";
+
 interface TileMap {
     width: number;
     height: number;

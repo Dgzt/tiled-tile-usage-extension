@@ -1,1 +1,5 @@
-declare const tiled: Tiled;
+import {Tiled} from "./tiled";
+
+declare global {
+    const tiled: Tiled;
+}
