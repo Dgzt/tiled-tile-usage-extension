@@ -1,0 +1,3 @@
+interface TilesetEditor {
+    collisionEditor: TileCollisionEditor
+}
