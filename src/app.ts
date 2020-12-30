@@ -10,7 +10,7 @@ function printUsage(tileLayer: TileLayer, tilesets: Array<Tileset>, usageMap: Ma
             const tileUsae = usageMap.has(tile.id) ? usageMap.get(tile.id) : 0;
             rowStr += tileUsae + "\t";
 
-            if (columnNum == tileColumnNum) {
+            if (columnNum === tileColumnNum) {
                 tiled.log(rowStr);
                 columnNum = 1;
                 rowStr = "";
