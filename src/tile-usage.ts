@@ -1,24 +1,13 @@
 const actionName = 'TileUsageAction';
 
-function printUsage(tileLayer: TileLayer, tilesets: Array<Tileset>, usageMap: Map<number, number>): void {
-    tilesets.forEach((tileset: Tileset) => {
-        const tileColumnNum = tileset.imageWidth / tileset.tileWidth;
+function showUsage(usageMap: Map<number, number>): void {
+    let text = "";
 
-        let columnNum = 1;
-        let rowStr = "";
-        tileset.tiles.forEach((tile: Tile) => {
-            const tileUsae = usageMap.has(tile.id) ? usageMap.get(tile.id) : 0;
-            rowStr += tileUsae + "\t";
-
-            if (columnNum === tileColumnNum) {
-                tiled.log(rowStr);
-                columnNum = 1;
-                rowStr = "";
-            } else {
-                ++columnNum;
-            }
-        });
+    tiled.mapEditor.tilesetsView.selectedTiles.forEach((tile: Tile) => {
+        const usage = usageMap.has(tile.id) ? usageMap.get(tile.id) : 0;
+        text += tile.id + ". tile: " + usage + "\n";
     });
+    tiled.alert(text, "Tile usage");
 }
 
 function actionCallback(): void {
@@ -37,7 +26,7 @@ function actionCallback(): void {
                 }
             }
 
-            printUsage(tileLayer, tileMap.tilesets, usageMap);
+            showUsage(usageMap);
         } else {
             tiled.alert("The selected layer is not tile layer!");
         }
