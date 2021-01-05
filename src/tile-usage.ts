@@ -38,9 +38,11 @@ function actionCallback(): void {
             }
 
             printUsage(tileLayer, tileMap.tilesets, usageMap);
+        } else {
+            tiled.alert("The selected layer is not tile layer!");
         }
     } else {
-        // TODO
+        tiled.alert("The active asset is not tile layer!");
     }
 }
 
