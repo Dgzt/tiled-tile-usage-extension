@@ -16,17 +16,21 @@ function actionCallback(): void {
         const usageMap = new Map<number, number>();
 
         if (tileMap.currentLayer.isTileLayer) {
-            const tileLayer = tileMap.currentLayer as TileLayer;
+            if (tiled.mapEditor.tilesetsView.selectedTiles.length > 0) {
+                const tileLayer = tileMap.currentLayer as TileLayer;
 
-            for (let i = 0; i < tileLayer.width; ++i) {
-                for (let j = 0; j < tileLayer.height; ++j) {
-                    const tileId = tileLayer.tileAt(i, j).id;
-                    const value = usageMap.has(tileId) ? usageMap.get(tileId) : 0;
-                    usageMap.set(tileId, value+1);
+                for (let i = 0; i < tileLayer.width; ++i) {
+                    for (let j = 0; j < tileLayer.height; ++j) {
+                        const tileId = tileLayer.tileAt(i, j).id;
+                        const value = usageMap.has(tileId) ? usageMap.get(tileId) : 0;
+                        usageMap.set(tileId, value + 1);
+                    }
                 }
-            }
 
-            showUsage(usageMap);
+                showUsage(usageMap);
+            } else {
+                tiled.alert("No tile selected in the tileset editor!");
+            }
         } else {
             tiled.alert("The selected layer is not tile layer!");
         }
