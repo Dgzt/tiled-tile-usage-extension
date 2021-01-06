@@ -1,5 +1,19 @@
 const actionName = 'TileUsageAction';
 
+function getTileLayers(tileMap: TileMap): Array<Layer> {
+    const retArray = [];
+
+    for (let i = 0; i < tileMap.layerCount; ++i) {
+        const layer = tileMap.layerAt(i);
+
+        if (layer.isTileLayer) {
+            retArray.push(layer);
+        }
+    }
+
+    return retArray;
+}
+
 function showUsage(usageMap: Map<number, number>): void {
     let text = "";
 
@@ -13,26 +27,29 @@ function showUsage(usageMap: Map<number, number>): void {
 function actionCallback(): void {
     if (tiled.activeAsset.isTileMap) {
         const tileMap = tiled.activeAsset as TileMap;
-        const usageMap = new Map<number, number>();
 
-        if (tileMap.currentLayer.isTileLayer) {
-            if (tiled.mapEditor.tilesetsView.selectedTiles.length > 0) {
-                const tileLayer = tileMap.currentLayer as TileLayer;
+        if (tiled.mapEditor.tilesetsView.selectedTiles.length > 0) {
+            const tileLayers = getTileLayers(tileMap);
 
-                for (let i = 0; i < tileLayer.width; ++i) {
-                    for (let j = 0; j < tileLayer.height; ++j) {
-                        const tileId = tileLayer.tileAt(i, j).id;
-                        const value = usageMap.has(tileId) ? usageMap.get(tileId) : 0;
-                        usageMap.set(tileId, value + 1);
+            if (tileLayers.length > 0) {
+                const usageMap = new Map<number, number>();
+
+                tileLayers.forEach((layer: TileLayer) => {
+                    for (let i = 0; i < layer.width; ++i) {
+                        for (let j = 0; j < layer.height; ++j) {
+                            const tileId = layer.tileAt(i, j).id;
+                            const value = usageMap.has(tileId) ? usageMap.get(tileId) : 0;
+                            usageMap.set(tileId, value + 1);
+                        }
                     }
-                }
+                });
 
                 showUsage(usageMap);
             } else {
-                tiled.alert("No tile selected in the tileset editor!");
+                tiled.alert("No tile layer!");
             }
         } else {
-            tiled.alert("The selected layer is not tile layer!");
+            tiled.alert("No tile selected in the tileset editor!");
         }
     } else {
         tiled.alert("The active asset is not tile layer!");
