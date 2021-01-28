@@ -14,13 +14,14 @@ function getTileLayers(tileMap: TileMap): Array<Layer> {
     return retArray;
 }
 
-function showUsage(usageMap: Map<number, number>): void {
+function showUsage(usageMap: Map<Tile, number>): void {
     let text = "";
 
     tiled.mapEditor.tilesetsView.selectedTiles.forEach((tile: Tile) => {
-        const usage = usageMap.has(tile.id) ? usageMap.get(tile.id) : 0;
+        const usage = usageMap.get(tile);
         text += tile.id + ". tile: " + usage + "\n";
     });
+
     tiled.alert(text, "Tile usage");
 }
 
@@ -29,17 +30,19 @@ function actionCallback(): void {
         const tileMap = tiled.activeAsset as TileMap;
 
         if (tiled.mapEditor.tilesetsView.selectedTiles.length > 0) {
-            const tileLayers = getTileLayers(tileMap);
+            const usageMap = new Map<Tile, number>();
+            tiled.mapEditor.tilesetsView.selectedTiles.forEach(tile => usageMap.set(tile, 0));
 
+            const tileLayers = getTileLayers(tileMap);
             if (tileLayers.length > 0) {
-                const usageMap = new Map<number, number>();
 
                 tileLayers.forEach((layer: TileLayer) => {
                     for (let i = 0; i < layer.width; ++i) {
                         for (let j = 0; j < layer.height; ++j) {
-                            const tileId = layer.tileAt(i, j).id;
-                            const value = usageMap.has(tileId) ? usageMap.get(tileId) : 0;
-                            usageMap.set(tileId, value + 1);
+                            const tile = layer.tileAt(i, j);
+                            if (tile && usageMap.has(tile)) {
+                                usageMap.set(tile, usageMap.get(tile) + 1);
+                            }
                         }
                     }
                 });
