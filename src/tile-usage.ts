@@ -14,12 +14,25 @@ function getTileLayers(tileMap: TileMap): Array<Layer> {
     return retArray;
 }
 
+function getTileNumPerLine(tile: Tile): number {
+    const tileset = tile.tileset;
+    return  tileset.imageWidth / tileset.tileWidth;
+}
+
+function getTilePositionX(tile: Tile): number {
+    return tile.id % getTileNumPerLine(tile) + 1;
+}
+
+function getTilePositionY(tile: Tile): number {
+    return Math.trunc(tile.id / getTileNumPerLine(tile)) + 1;
+}
+
 function showUsage(usageMap: Map<Tile, number>): void {
     let text = "";
 
     tiled.mapEditor.tilesetsView.selectedTiles.forEach((tile: Tile) => {
         const usage = usageMap.get(tile);
-        text += tile.id + ". tile: " + usage + "\n";
+        text += tile.id + ". (" + getTilePositionX(tile) + " x " + getTilePositionY(tile) + ") tile: " + usage + "\n";
     });
 
     tiled.alert(text, "Tile usage");
